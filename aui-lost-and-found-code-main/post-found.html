@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Post Found Item - AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .navbar {
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.8rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            background-color: #367c39;
+        }
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            margin-top: 80px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #367c39;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="post-found.html">Post Found Item</a>
+    <a href="search-lost.html">Search Lost Items</a>
+    <a href="claim-item.html">Claim Item</a>
+    <a href="about.html">About</a>
+    <a href="sign-in.html">Sign In</a>
+</div>
+
+<div class="content">
+    <div class="form-container">
+        <h2>Post a Found Item</h2>
+        <form id="postItemForm" enctype="multipart/form-data">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" name="description" required>
+
+            <label for="category">Category</label>
+            <select id="category" name="categoryID" required>
+                <option value="">Please select a category</option>
+                <option value="1">Electronics</option>
+                <option value="2">Clothing</option>
+                <option value="3">Documents</option>
+                <option value="4">Other</option>
+            </select>
+
+            <label for="location">Location Found</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="dateFound">Date Found</label>
+            <input type="date" id="dateFound" name="dateFound" required>
+
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo" name="photo" required>
+
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('postItemForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        fetch('http://localhost:3000/post-item', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

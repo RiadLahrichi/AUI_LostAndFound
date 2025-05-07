@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>AUI Lost and Found</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('aui.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    color: white;
+}
+
+.navbar {
+    background-color: #4CAF50; /* Adjust the background color as needed */
+    color: white;
+    display: flex;
+    justify-content: flex-start; /* Aligns links to the left */
+    align-items: center;
+    padding: 0.8rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    justify-content: flex-start; /* Keeps items aligned to the left */
+   
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    background-color: #367c39;
+}
+
+.content {
+    position: fixed; /* Fixes the position relative to the viewport */
+    bottom: 0; /* Anchors the content to the bottom of the viewport */
+    width: 100%; /* Ensures the content stretches across the full width */
+    background-color: rgba(0, 0, 0, 0.5); /* Maintains readability with a semi-transparent overlay */
+    padding: 20px; /* Adds padding inside the content area */
+    text-align: center; /* Centers the text within the content area */
+    font-size: 20px; /* Increase font size for better visibility */
+    color: white; /* Ensure text is white */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better contrast */
+}
+
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 12px 20px; /* More padding for better touch interaction */
+    font-size: 16px; /* Larger text for better readability */
+    border-radius: 5px; /* Soft rounded corners for a modern look */
+}
+
+.button:hover {
+    background-color: #367c39;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="post-found.html">Post Found Item</a>
+        <a href="search-lost.html">Search Lost Items</a>
+        <a href="claim-item.html">Claim Item</a>
+        <a href="about.html">About</a>
+        <a href="sign-in.html">Sign In</a>
+        <a href="login.html">Login</a>
+    </div>
+    
+</div>
+
+<div class="content">
+    <h1>AUI Lost and Found</h1>
+    <p>Reuniting you with your belongings</p>
+    <button class="button">Post a Found Item</button>
+</div>
+
+</body>
+</html>
