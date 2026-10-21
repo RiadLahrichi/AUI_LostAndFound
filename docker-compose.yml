@@ -1,0 +1,18 @@
+# PostgreSQL with the pgvector extension already installed.
+#   docker compose up -d     start it in the background
+#   docker compose down      stop it (the data stays in the "pgdata" volume)
+# The user, password, database name and port come from the .env file.
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
