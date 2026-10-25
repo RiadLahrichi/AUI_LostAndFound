@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up - AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<div class="content">
+    <div class="form-container">
+        <h2>Sign Up for AUI Lost and Found</h2>
+        <form id="signup-form">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="email">Email</label>
+            <!-- Only AUI addresses. The server checks this too, because anyone can skip the browser check. -->
+            <input type="email" id="email" name="email" placeholder="yourname@aui.ma" pattern=".+@aui\.ma" required>
+
+            <label for="password">Password (at least 8 characters)</label>
+            <input type="password" id="password" name="password" minlength="8" required>
+
+            <button type="submit" class="button">Sign Up</button>
+        </form>
+        <div id="message" class="message"></div>
+        <p>Already have an account? <a href="login.html">Log in here.</a></p>
+    </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    const form = document.getElementById('signup-form');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        try {
+            // Turns the form into { firstName: ..., lastName: ..., email: ..., password: ... }
+            await sendJson('/signup', Object.fromEntries(new FormData(form)));
+            window.location.href = 'account.html';
+        } catch (error) {
+            showMessage(document.getElementById('message'), error.message, true);
+        }
+    });
+
+    showMenu();
+</script>
+</body>
+</html>

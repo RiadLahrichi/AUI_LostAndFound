@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search - AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<div class="content">
+    <div class="form-container">
+        <h2>Search Items</h2>
+        <form id="search-form">
+            <label for="q">Describe the item</label>
+            <input type="text" id="q" name="q" placeholder="e.g. black wireless earbuds">
+
+            <label for="kind">Show</label>
+            <select id="kind" name="kind">
+                <option value="found">Found items</option>
+                <option value="lost">Lost items</option>
+                <option value="">Both</option>
+            </select>
+
+            <label for="category">Category</label>
+            <select id="category" name="categoryId"></select>
+
+            <label>Search by</label>
+            <div class="choice">
+                <label><input type="radio" name="mode" value="semantic" checked> Meaning</label>
+                <label><input type="radio" name="mode" value="keyword"> Keywords</label>
+            </div>
+
+            <button type="submit" class="button">Search</button>
+        </form>
+        <div id="message" class="message"></div>
+    </div>
+
+    <div id="results" class="cards"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    const form = document.getElementById('search-form');
+
+    async function search() {
+        // The form fields become the query string: q=...&kind=found&categoryId=&mode=semantic
+        const query = new URLSearchParams(new FormData(form)).toString();
+        try {
+            const items = await api('/search?' + query);
+            showItems(document.getElementById('results'), items, 'No items match your search.');
+            document.getElementById('message').textContent = '';
+        } catch (error) {
+            showMessage(document.getElementById('message'), error.message, true);
+        }
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        search();
+    });
+
+    async function loadPage() {
+        await showMenu();
+        await loadCategories(document.getElementById('category'), 'Any category');
+        search();  // with an empty search box this shows the newest found items
+    }
+
+    loadPage();
+</script>
+</body>
+</html>

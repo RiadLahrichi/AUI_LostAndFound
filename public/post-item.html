@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Report an Item - AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<div class="content">
+    <div class="form-container">
+        <h2>Report an Item</h2>
+        <p id="login-needed" class="message error" hidden>
+            You need to <a href="login.html">log in</a> to report an item.
+        </p>
+
+        <form id="item-form">
+            <label>What happened?</label>
+            <div class="choice">
+                <label><input type="radio" name="kind" value="found" checked> I found it</label>
+                <label><input type="radio" name="kind" value="lost"> I lost it</label>
+            </div>
+
+            <label for="title">Item name</label>
+            <input type="text" id="title" name="title" placeholder="e.g. Black backpack" maxlength="150" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Color, brand, anything that helps recognize it" required></textarea>
+
+            <label for="category">Category</label>
+            <select id="category" name="categoryId" required></select>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Library, second floor" maxlength="150" required>
+
+            <label for="eventDate">Date</label>
+            <input type="date" id="eventDate" name="eventDate" required>
+
+            <label for="photo">Photo (optional)</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+
+            <button type="submit" class="button">Submit</button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <div id="matches" hidden>
+        <h2>Items that look similar</h2>
+        <div id="similar" class="cards"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    const form = document.getElementById('item-form');
+    const message = document.getElementById('message');
+
+    async function loadPage() {
+        const user = await showMenu();
+        if (!user) {
+            document.getElementById('login-needed').hidden = false;
+            form.hidden = true;
+            return;
+        }
+        await loadCategories(document.getElementById('category'), 'Please select a category');
+
+        // index.html links here with ?kind=lost or ?kind=found
+        const kind = new URLSearchParams(window.location.search).get('kind');
+        if (kind === 'lost' || kind === 'found') {
+            form.querySelector(`input[value="${kind}"]`).checked = true;
+        }
+        // Default to today, and don't allow future dates.
+        // The en-CA format happens to be YYYY-MM-DD, which is what a date input needs.
+        const today = new Date().toLocaleDateString('en-CA');
+        const dateInput = document.getElementById('eventDate');
+        dateInput.value = today;
+        dateInput.max = today;
+    }
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        showMessage(message, 'Saving...');
+        try {
+            // FormData sends the form as multipart/form-data, which can include the photo
+            const result = await api('/items', { method: 'POST', body: new FormData(form) });
+            showMessage(message, 'Your item was posted. People who lost or found something similar will be notified.');
+            message.innerHTML += ` <a href="item.html?id=${result.itemId}">See your item</a>`;
+            form.reset();
+
+            document.getElementById('matches').hidden = false;
+            showItems(document.getElementById('similar'), result.similar, 'Nothing similar has been posted yet.');
+        } catch (error) {
+            showMessage(message, error.message, true);
+        }
+    });
+
+    loadPage();
+</script>
+</body>
+</html>
