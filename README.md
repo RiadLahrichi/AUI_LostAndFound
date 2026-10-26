@@ -12,38 +12,13 @@ sentence-embedding model (all-MiniLM-L6-v2) that runs locally, with no API key.
 
 ## Results
 
+<!-- TODO: run `npm run evaluate` and paste the tables from results/evaluation.md here -->
+
 The evaluation uses 40 objects, each described twice in different words: once by the owner
 who lost it and once by the person who found it ([data/eval-pairs.json](data/eval-pairs.json)).
 Every lost description is searched among the 40 found items, once with PostgreSQL full-text
 search and once with embeddings. It also measures the automatic notifications at different
 distance thresholds.
-
-- Searching by meaning put the right item first for 37 of 40 lost items (93%), against 26 of 40 (65%) for keyword search. The right item was always in the top 3 (40 of 40), against 33 of 40 (83%).
-- The two descriptions of the same object were close (median cosine distance 0.34) and descriptions of different objects were far apart (0.77).
-- The notification threshold is a trade-off. At 0.45, the value the trigger uses, it sent 44 notifications and 32 were right (73% precision), and 32 of 40 owners heard about their item (80% recall). A lower threshold sends fewer but more accurate notifications, a higher one reaches more owners with more wrong ones.
-
-### Search
-
-| search | right item first | right item in top 3 | no result at all |
-|---|---|---|---|
-| keyword (full-text search) | 26/40 (65%) | 33/40 (83%) | 0 |
-| semantic (embeddings) | 37/40 (93%) | 40/40 (100%) | 0 |
-
-### Automatic match notifications
-
-For each threshold: how many notifications the trigger would send, how many point to the right item (precision), and how many owners hear about their item (recall).
-
-| max distance | notifications | right ones (precision) | owners notified (recall) |
-|---|---|---|---|
-| 0.35 | 23 | 23 (100%) | 23/40 (58%) |
-| 0.4 | 31 | 27 (87%) | 27/40 (68%) |
-| 0.45 | 44 | 32 (73%) | 32/40 (80%) |
-| 0.5 | 56 | 36 (64%) | 36/40 (90%) |
-| 0.55 | 74 | 37 (50%) | 37/40 (93%) |
-| 0.6 | 120 | 38 (32%) | 38/40 (95%) |
-| 0.65 | 165 | 39 (24%) | 39/40 (98%) |
-
-Run it yourself with `npm run evaluate`. The full output is in [results/evaluation.md](results/evaluation.md).
 
 ## How it works
 
