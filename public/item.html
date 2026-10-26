@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item - AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<div class="content">
+    <div id="item" class="panel"></div>
+
+    <!-- Only one of these panels is shown, depending on who is looking -->
+    <div id="claim-panel" class="panel" hidden>
+        <h3>Is this yours?</h3>
+        <form id="claim-form">
+            <label for="claim-message">Describe something only the owner would know</label>
+            <textarea id="claim-message" placeholder="e.g. there is a sticker inside, the lock screen photo is my cat..." required></textarea>
+            <button type="submit" class="button">Claim this item</button>
+        </form>
+        <div id="claim-result" class="message"></div>
+    </div>
+
+    <div id="owner-panel" class="panel" hidden>
+        <h3 id="owner-title">Claims on your item</h3>
+        <div id="claims"></div>
+        <button id="returned" class="button small">Mark as returned</button>
+        <div id="owner-message" class="message"></div>
+    </div>
+
+    <div id="info" class="panel" hidden></div>
+
+    <h2 id="similar-title"></h2>
+    <div id="similar" class="cards"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    const itemId = new URLSearchParams(window.location.search).get('id');
+
+    function showItem(item, photos) {
+        const photoTags = photos.map((path) => `<img class="photo" src="${escapeHtml(path)}" alt="Photo of the item">`).join('');
+        document.getElementById('item').innerHTML = `
+            <span class="badge ${item.kind}">${item.kind}</span>
+            <span class="badge status">${item.status}</span>
+            <h2>${escapeHtml(item.title)}</h2>
+            <p>${escapeHtml(item.description)}</p>
+            <p class="small-text">Category: ${escapeHtml(item.category)}</p>
+            <p class="small-text">${item.kind === 'lost' ? 'Lost' : 'Found'} at ${escapeHtml(item.location)} on ${escapeHtml(item.event_date)}</p>
+            <p class="small-text">Reported by ${escapeHtml(item.reporter_name)}</p>
+            ${photoTags}`;
+    }
+
+    // The finder sees the claims, with buttons for the pending ones
+    function showClaims(claims) {
+        const container = document.getElementById('claims');
+        if (claims.length === 0) {
+            container.innerHTML = '<p class="empty">Nobody has claimed this item yet.</p>';
+            return;
+        }
+        container.innerHTML = claims.map((claim) => `
+            <div class="list-item">
+                <strong>${escapeHtml(claim.claimant_name)}</strong>
+                <span class="badge status">${claim.status}</span>
+                <p>${escapeHtml(claim.message)}</p>
+                ${claim.claimant_email ? `<p class="small-text">Contact: ${escapeHtml(claim.claimant_email)}</p>` : ''}
+                ${claim.status === 'pending' ? `
+                    <button class="button small" data-claim="${claim.claim_id}" data-decision="approved">Approve</button>
+                    <button class="button small grey" data-claim="${claim.claim_id}" data-decision="rejected">Reject</button>` : ''}
+            </div>`).join('');
+    }
+
+    async function loadPage() {
+        const user = await showMenu();
+        let data;
+        try {
+            data = await api('/items/' + itemId);
+        } catch (error) {
+            document.getElementById('item').innerHTML = `<p class="message error">${escapeHtml(error.message)}</p>`;
+            return;
+        }
+        const { item, photos, similar, isOwner, claims, myClaim } = data;
+        showItem(item, photos);
+
+        const info = document.getElementById('info');
+        if (isOwner) {
+            document.getElementById('owner-panel').hidden = false;
+            if (item.kind === 'found') {
+                showClaims(claims);
+            } else {
+                // Lost items can't be claimed, the owner can only say they got it back
+                document.getElementById('owner-title').textContent = 'Your lost item';
+                document.getElementById('returned').textContent = 'I got it back';
+            }
+            document.getElementById('returned').hidden = item.status === 'returned';
+        } else if (myClaim) {
+            info.hidden = false;
+            info.textContent = `You claimed this item. Your claim is ${myClaim.status}.`;
+        } else if (item.kind === 'found' && item.status === 'open') {
+            if (user) {
+                document.getElementById('claim-panel').hidden = false;
+            } else {
+                info.hidden = false;
+                info.innerHTML = 'Is this yours? <a href="login.html">Log in</a> to claim it.';
+            }
+        }
+
+        document.getElementById('similar-title').textContent =
+            item.kind === 'lost' ? 'Found items that could be this one' : 'Lost reports that could be this item';
+        showItems(document.getElementById('similar'), similar, 'Nothing similar yet.');
+    }
+
+    document.getElementById('claim-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const result = document.getElementById('claim-result');
+        try {
+            await sendJson(`/items/${itemId}/claims`, { message: document.getElementById('claim-message').value });
+            showMessage(result, 'Your claim was sent. The finder will approve or reject it, and you will get a notification.');
+            document.getElementById('claim-form').hidden = true;
+        } catch (error) {
+            showMessage(result, error.message, true);
+        }
+    });
+
+    // One listener for all the Approve / Reject buttons
+    document.getElementById('claims').addEventListener('click', async (event) => {
+        const button = event.target.closest('button[data-claim]');
+        if (!button) return;
+        try {
+            await sendJson('/claims/' + button.dataset.claim, { status: button.dataset.decision }, 'PATCH');
+            window.location.reload();
+        } catch (error) {
+            showMessage(document.getElementById('owner-message'), error.message, true);
+        }
+    });
+
+    document.getElementById('returned').addEventListener('click', async () => {
+        try {
+            await sendJson(`/items/${itemId}/status`, { status: 'returned' }, 'PATCH');
+            window.location.reload();
+        } catch (error) {
+            showMessage(document.getElementById('owner-message'), error.message, true);
+        }
+    });
+
+    loadPage();
+</script>
+</body>
+</html>

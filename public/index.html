@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AUI Lost and Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar"></nav>
+
+<div class="hero">
+    <h1>AUI Lost and Found</h1>
+    <p>Reuniting you with your belongings</p>
+    <a class="button" href="post-item.html?kind=found">I found something</a>
+    <a class="button" href="post-item.html?kind=lost">I lost something</a>
+</div>
+
+<div class="content">
+    <h2>Recently found</h2>
+    <div id="found" class="cards"></div>
+
+    <h2>Recently lost</h2>
+    <div id="lost" class="cards"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    async function loadPage() {
+        await showMenu();
+        const found = await api('/items?kind=found&limit=8');
+        const lost = await api('/items?kind=lost&limit=8');
+        showItems(document.getElementById('found'), found, 'Nothing has been found yet.');
+        showItems(document.getElementById('lost'), lost, 'Nothing has been reported lost yet.');
+    }
+
+    loadPage();
+</script>
+</body>
+</html>
