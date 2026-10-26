@@ -1,0 +1,162 @@
+[
+  {
+    "lost": { "title": "AirPods Pro", "description": "White AirPods Pro in their charging case, I think I left them on a table on the second floor of the library." },
+    "found": { "title": "Wireless earbuds case", "description": "Small white case with two earphones inside, found under a desk upstairs in the library." }
+  },
+  {
+    "lost": { "title": "iPhone 13 with blue case", "description": "My iPhone 13 with a dark blue silicone case and a cracked screen protector." },
+    "found": { "title": "Phone with cracked screen", "description": "Found a smartphone in a navy cover, the glass on the front is cracked. It was on a bench near the gym." }
+  },
+  {
+    "lost": { "title": "Student ID card", "description": "My AUI student card, I need it to get into the residence and the library." },
+    "found": { "title": "University card", "description": "Found a campus card with a photo of a girl on it, near the cafeteria entrance." }
+  },
+  {
+    "lost": { "title": "Toyota car key", "description": "Toyota car key with a small Eiffel Tower keychain." },
+    "found": { "title": "Key with keychain", "description": "A vehicle key with a little Paris tower keyring, found in the parking lot." }
+  },
+  {
+    "lost": { "title": "Hydro Flask", "description": "Green 32 oz Hydro Flask covered in stickers." },
+    "found": { "title": "Water bottle", "description": "Metal drinking bottle, green, lots of stickers on it, left in the gym." }
+  },
+  {
+    "lost": { "title": "MacBook charger", "description": "White USB-C power adapter for my MacBook with a long cable." },
+    "found": { "title": "Laptop power adapter", "description": "A white Apple charging brick with a USB-C wire, still plugged in a classroom socket." }
+  },
+  {
+    "lost": { "title": "Prescription glasses", "description": "Black rectangular glasses in a brown case." },
+    "found": { "title": "Spectacles in a case", "description": "Pair of eyeglasses with dark frames inside a leather case." }
+  },
+  {
+    "lost": { "title": "Brown leather wallet", "description": "Brown wallet with my national ID card and some cash." },
+    "found": { "title": "Purse with ID", "description": "Found a leather purse with an identity card inside, near the mosque." }
+  },
+  {
+    "lost": { "title": "Grey AUI hoodie", "description": "Grey hoodie with the AUI logo on the front, size M." },
+    "found": { "title": "Sweatshirt", "description": "A gray sweater with a hood and the university logo, left in a lecture hall." }
+  },
+  {
+    "lost": { "title": "Black umbrella", "description": "Large black umbrella with a wooden handle." },
+    "found": { "title": "Umbrella", "description": "Big dark umbrella with a curved wood handle, left at the bus stop." }
+  },
+  {
+    "lost": { "title": "Scientific calculator", "description": "Casio fx-991 calculator, my name is written on the back." },
+    "found": { "title": "Calculator", "description": "Casio calculator found in the exam room, there is a name on the back." }
+  },
+  {
+    "lost": { "title": "Database Systems textbook", "description": "Database System Concepts, 7th edition, with my notes in the margins." },
+    "found": { "title": "Computer science book", "description": "A thick book about SQL and relational models with handwritten notes, found in the library." }
+  },
+  {
+    "lost": { "title": "Silver ring", "description": "Thin silver ring with a small blue stone, lost at the gym." },
+    "found": { "title": "Ring", "description": "Found a small silver band with a blue gem in the women's locker room." }
+  },
+  {
+    "lost": { "title": "Black backpack", "description": "Black Nike backpack with my laptop sleeve and notebooks." },
+    "found": { "title": "School bag", "description": "Dark Nike rucksack with notebooks inside, found near the tennis courts." }
+  },
+  {
+    "lost": { "title": "Sony headphones", "description": "Sony WH-1000XM4 over-ear headphones, black." },
+    "found": { "title": "Headset", "description": "Black noise cancelling headset found in the study room." }
+  },
+  {
+    "lost": { "title": "Power bank", "description": "White Anker power bank, 10000 mAh." },
+    "found": { "title": "Portable battery", "description": "Small white external battery for charging phones, found on the shuttle bus." }
+  },
+  {
+    "lost": { "title": "Football boots", "description": "Adidas football shoes, black and pink, size 42." },
+    "found": { "title": "Soccer cleats", "description": "Pair of cleats, black with pink stripes, left on the field after practice." }
+  },
+  {
+    "lost": { "title": "Apple Watch", "description": "Apple Watch with a white sport band." },
+    "found": { "title": "Smartwatch", "description": "A smart watch with a white rubber strap, found near the swimming pool." }
+  },
+  {
+    "lost": { "title": "Passport", "description": "Moroccan passport in a black cover." },
+    "found": { "title": "Travel document", "description": "Found a passport in a dark leather holder at the registrar's office." }
+  },
+  {
+    "lost": { "title": "Blue scarf", "description": "Long navy blue wool scarf." },
+    "found": { "title": "Shawl", "description": "A dark blue knitted shawl left on a chair in the cafeteria." }
+  },
+  {
+    "lost": { "title": "Room keys", "description": "Two keys on a red lanyard, one of them opens my dorm room." },
+    "found": { "title": "Keys on a strap", "description": "A couple of keys attached to a red neck strap, found on the stairs." }
+  },
+  {
+    "lost": { "title": "USB flash drive", "description": "32GB SanDisk USB stick with all my capstone files on it." },
+    "found": { "title": "Memory stick", "description": "Small SanDisk thumb drive left in a lab computer." }
+  },
+  {
+    "lost": { "title": "iPad with pencil", "description": "iPad Air in a pink folio case with an Apple Pencil." },
+    "found": { "title": "Tablet", "description": "A tablet in a pink cover with a stylus, found in the student center." }
+  },
+  {
+    "lost": { "title": "Ray-Ban sunglasses", "description": "Ray-Ban aviator sunglasses with a black frame." },
+    "found": { "title": "Shades", "description": "Dark aviator shades found on the grass near the fountain." }
+  },
+  {
+    "lost": { "title": "Leather jacket", "description": "Black leather jacket with silver zippers." },
+    "found": { "title": "Jacket", "description": "Found a dark leather coat with metal zips in the auditorium." }
+  },
+  {
+    "lost": { "title": "Gym bag", "description": "Red Puma sports bag with my training clothes." },
+    "found": { "title": "Duffel bag", "description": "A red duffel with sports clothes inside, left in the locker room." }
+  },
+  {
+    "lost": { "title": "Samsung phone", "description": "Samsung Galaxy A54, purple, no case." },
+    "found": { "title": "Purple smartphone", "description": "A lilac Android phone without a cover, found in the cafeteria." }
+  },
+  {
+    "lost": { "title": "Calculus notebook", "description": "Green spiral notebook with all my calculus notes." },
+    "found": { "title": "Notepad", "description": "A green notebook full of math formulas and integrals." }
+  },
+  {
+    "lost": { "title": "Gold necklace", "description": "Thin gold chain with a small heart pendant." },
+    "found": { "title": "Chain with pendant", "description": "Golden necklace with a little heart charm, found in the prayer room." }
+  },
+  {
+    "lost": { "title": "iPhone charger", "description": "White lightning charging cable for an iPhone." },
+    "found": { "title": "Charging cable", "description": "White lightning cable left plugged in at the library." }
+  },
+  {
+    "lost": { "title": "Starbucks travel mug", "description": "Black Starbucks travel mug with a lid." },
+    "found": { "title": "Coffee cup", "description": "Black reusable coffee tumbler from Starbucks found on a table." }
+  },
+  {
+    "lost": { "title": "Tennis racket", "description": "Wilson tennis racket in a blue cover." },
+    "found": { "title": "Racquet", "description": "A racquet in a blue bag left at the courts." }
+  },
+  {
+    "lost": { "title": "Pearl earrings", "description": "Pair of small pearl earrings." },
+    "found": { "title": "Ear studs", "description": "Two tiny white pearl studs found in the restroom." }
+  },
+  {
+    "lost": { "title": "Wireless mouse", "description": "Logitech wireless mouse, grey." },
+    "found": { "title": "Computer mouse", "description": "Gray Logitech mouse with a USB receiver, found in the computer lab." }
+  },
+  {
+    "lost": { "title": "Yankees cap", "description": "Black New York Yankees baseball cap." },
+    "found": { "title": "Hat", "description": "Dark baseball hat with an NY logo, found at the basketball court." }
+  },
+  {
+    "lost": { "title": "Bank card", "description": "CIH bank debit card in my name." },
+    "found": { "title": "Debit card", "description": "A payment card from CIH bank found next to the ATM." }
+  },
+  {
+    "lost": { "title": "Bike lock key", "description": "Small key for my bicycle lock with a yellow tag." },
+    "found": { "title": "Small key", "description": "Tiny key with a yellow label found near the bike rack." }
+  },
+  {
+    "lost": { "title": "Prayer beads", "description": "Brown wooden misbaha." },
+    "found": { "title": "Tasbih", "description": "Wooden beads on a string, brown, found in the mosque." }
+  },
+  {
+    "lost": { "title": "Dell laptop", "description": "Dell XPS 13 laptop in a grey sleeve." },
+    "found": { "title": "Notebook computer", "description": "A silver Dell computer inside a gray sleeve, found in a classroom." }
+  },
+  {
+    "lost": { "title": "Wired earphones", "description": "Cheap white wired earphones with a microphone." },
+    "found": { "title": "Earbuds with cable", "description": "White corded earbuds with a mic, found on the bus." }
+  }
+]
